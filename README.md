@@ -1,5 +1,5 @@
-ObjectPool
-==========
+SimpleObjectPool
+================
 
 Simple implementation of a thread-safe object pool. When the pool is empty, it
 naively creates another object using the createBlock.
