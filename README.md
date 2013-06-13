@@ -8,12 +8,12 @@ To use:
 
 ``` objc
 ObjectPool *pool = [ObjectPool poolWithCreateBlock:^id(NSError **outError) {
-DDLogInfo(@"Opening database connection");
-MyDBConnection *connection = [MyDBConnection connection]
-if (![connection openWithError:outError])
-	return nil;
-else
- 	return connection;
+    DDLogInfo(@"Opening database connection");
+    MyDBConnection *connection = [MyDBConnection connection]
+    if (![connection openWithError:outError])
+	    return nil;
+    else
+ 	    return connection;
 }];
 
 MyDBConnection *connection = [pool objectFromPoolWithError:nil];
