@@ -38,9 +38,9 @@
 + (instancetype) poolWithCreateBlock:(CreateObjectBlock) createBlock {
     ObjectPool *result = [[self alloc] initWithCreateBlock:createBlock];
 #if __has_feature(objc_arc)
-    return [result autorelease];
-#else
     return result;
+#else
+    return [result autorelease];
 #endif
 }
 
