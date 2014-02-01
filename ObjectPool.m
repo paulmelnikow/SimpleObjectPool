@@ -57,6 +57,7 @@
     id result = nil;
     @synchronized(self.pool) {
         result = [self.pool lastObject];
+        [self.pool removeLastObject];
     }
     
     if (result == nil) {
