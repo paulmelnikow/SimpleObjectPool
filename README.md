@@ -20,5 +20,5 @@ MyDBConnection *connection = [pool objectFromPoolWithError:nil];
  
 // do stuff with connection
 
-pool returnObjectToPool:connection];
+[pool returnObjectToPool:connection];
 ```

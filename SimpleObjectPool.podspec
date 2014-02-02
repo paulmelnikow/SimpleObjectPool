@@ -7,11 +7,11 @@ Pod::Spec.new do |s|
                    When the pool is empty, it naively creates another
                    object using a block provided.
                    DESC
-  s.homepage     = 'https://github.com/paulmelnikow/AFNetworking-Synchronous'
+  s.homepage     = 'https://github.com/paulmelnikow/SimpleObjectPool'
   s.license      = 'Apache 2.0'
   s.author       = { "Paul Melnikow" => "github@paulmelnikow.com" }
   s.source       = { :git => 'https://github.com/paulmelnikow/SimpleObjectPool.git',
-                     :tag => "v#{s.version}" }
+                     :tag => "#{s.version}" }
 
   s.requires_arc = true
 
