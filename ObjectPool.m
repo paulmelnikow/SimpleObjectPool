@@ -30,6 +30,7 @@
 - (id) initWithCreateBlock:(CreateObjectBlock) createBlock {
     if (self = [super init]) {
         self.pool = [NSMutableArray array];
+        self.privateAllObjects = [NSMutableArray array];
         self.createBlock = createBlock;
     }
     return self;
@@ -48,7 +49,7 @@
 - (void) dealloc {
     [self.createBlock release];
     [self.pool release];
-    [self.allObjects release];
+    [self.privateAllObjects release];
     [super dealloc];
 }
 #endif
@@ -59,15 +60,15 @@
         result = [self.pool lastObject];
         [self.pool removeLastObject];
     }
-    
+
     if (result == nil) {
         result = self.createBlock(outError);
         if (result != nil)
-            @synchronized(self.allObjects) {
+            @synchronized(self.privateAllObjects) {
                 [self.privateAllObjects addObject:result];
             }
     }
-    
+
     return result;
 }
 
