@@ -1,0 +1,22 @@
+PODS:
+  - Expecta (1.0.5)
+  - SimpleObjectPool (1.0.0)
+  - Specta (1.0.6)
+
+DEPENDENCIES:
+  - Expecta
+  - SimpleObjectPool (from `../`)
+  - Specta
+
+EXTERNAL SOURCES:
+  SimpleObjectPool:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
+  SimpleObjectPool: 6d95997d5b90ecf866d232fe58e908b52140b142
+  Specta: f506f3a8361de16bc0dcf3b17b75e269072ba465
+
+PODFILE CHECKSUM: e8edffa2e825e7649a66782a93ce64eb8f5fb6b0
+
+COCOAPODS: 1.2.0

@@ -1,0 +1,8 @@
+use_frameworks!
+target 'Tests' do
+  pod 'SimpleObjectPool', :path => '../'
+
+  pod 'Specta'
+  pod 'Expecta'
+end
+
