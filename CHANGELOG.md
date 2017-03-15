@@ -2,6 +2,13 @@ SimpleObjectPool Changelog
 ==========================
 
 
+1.0.1
+-----
+March 15, 2017
+
+Add tests and improve documentation.
+
+
 1.0.0
 -----
 January 31, 2016

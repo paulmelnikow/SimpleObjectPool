@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'SimpleObjectPool'
-  s.version      = '1.0.0'
+  s.version      = '1.0.1'
   s.summary      = 'Simple thread-safe object pool in Objective-C'
   s.description  = <<-DESC
                    Simple implementation of a thread-safe object pool.
