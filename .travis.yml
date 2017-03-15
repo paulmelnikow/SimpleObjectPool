@@ -1,0 +1,32 @@
+language: objective-c
+
+osx_image: xcode8.2
+
+before_install:
+  - curl -sL https://gist.github.com/henrikhodne/7ac6d02ff9a24a94720c/raw/install_appledoc.sh |
+    sh
+
+before_script:
+  - (cd TestProject && pod install)
+
+script:
+  - set -o pipefail &&
+    xcodebuild
+    test
+    -destination 'platform=iOS Simulator,name=iPhone 7 Plus,OS=10.2'
+    -workspace TestProject/TestProject.xcworkspace
+    -scheme Tests
+    -sdk iphonesimulator10.2
+    ONLY_ACTIVE_ARCH=NO |
+    xcpretty
+  - appledoc
+    --project-name 'SimpleObjectPool'
+    --project-company 'Paul Melnikow'
+    --company-id 'com.paulmelnikow.simpleobjectpool'
+    -o /tmp
+    *.h
+  - pod lib lint --allow-warnings
+
+notifications:
+  slack:
+    secure: L60jPEUeOW1Uimwmn6SImasEaFBdsGSqoPEZsamm9poukhBL3FVqtPRmCc8WMCCTvWtr6yRS0N+CnoClPsK3nL9q/ou0jh7OFcQ5Qgkfu5DNYvnoV9/7Yy0izcj9F2ZHVjuLF/R0OXmcuxmjsh3PRMqzSH9FNe6iiSDDOSSXpCA=
