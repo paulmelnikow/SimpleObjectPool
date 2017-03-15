@@ -1,34 +1,59 @@
-//
-//  ObjectPool.h
-//
-//  Created by Paul Melnikow on 6/12/13.
-//  Copyright (c) 2013 Paul Melnikow. All rights reserved.
-//
-//  Licensed under the Apache License, Version 2.0 (the "License");
-//  you may not use this file except in compliance with the License.
-//  You may obtain a copy of the License at
-//
-//  http://www.apache.org/licenses/LICENSE-2.0
-//
-//  Unless required by applicable law or agreed to in writing, software
-//  distributed under the License is distributed on an "AS IS" BASIS,
-//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//  See the License for the specific language governing permissions and
-//  limitations under the License.
-//
-
 #import <Foundation/Foundation.h>
 
 typedef id (^CreateObjectBlock)(NSError ** outError);
 
+/**
+ Simple, thread-safe object pool. The pool re-uses existing objects when
+ one is available, and creates new ones when one is not.
+
+ It keeps references to all the objects it creates.
+ */
 @interface ObjectPool : NSObject
 
+/**
+ Create a new pool.
+
+ Example:
+
+    ObjectPool *pool = [ObjectPool poolWithCreateBlock:^id(NSError **outError) {
+        NSLog(@"Opening database connection");
+        MyDBConnection *connection = [MyDBConnection connection]
+        if (![connection openWithError:outError])
+          return nil;
+        else
+          return connection;
+    }];
+
+ @param createBlock A block used to create the object. This block returns
+   the new object, and takes one argument: a pointer to an error object
+   which can be filled if an error occurs while creating the new
+   object.
+
+ @return The newly initialized pool
+ */
 + (instancetype) poolWithCreateBlock:(CreateObjectBlock) createBlock;
 
+/**
+ Obtain an object from the pool. If the pool is empty, one is created
+ using the createBlock.
+
+ @param outError The address at which a pointer to an error object is
+    placed when an error occurs creating a new object.
+
+ @return The new or recycled object, or nil if an error occurred
+ */
 - (id) objectFromPoolWithError:(NSError **) outError;
+
+/**
+ Return an object to the pool, making it available for re-use.
+
+ @param object The object to return to the pool
+ */
 - (void) returnObjectToPool:(id) object;
 
-/* All objects (including those which are in use) */
+/**
+ All objects created by the pool, including those which are in use.
+ */
 @property (retain, readonly) NSArray *allObjects;
 
 @end
