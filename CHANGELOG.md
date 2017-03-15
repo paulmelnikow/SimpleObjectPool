@@ -1,5 +1,5 @@
-SimpleObjectPool release history
-================================
+SimpleObjectPool Changelog
+==========================
 
 
 1.0.0
